@@ -15,4 +15,5 @@
     <color name="main_color">#FF1B7CED</color>
     <color name="main_text_color">#FF000000</color>
     <color name="secondary_text_color">#FF212121</color>
+    <color name="err_color">#FFB00020</color>
 </resources>

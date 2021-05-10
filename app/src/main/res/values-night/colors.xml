@@ -7,4 +7,5 @@
     <color name="main_color">#FF1B7CED</color>
     <color name="main_text_color">#FFFFFFFF</color>
     <color name="secondary_text_color">#FFE7E7E7</color>
+    <color name="err_color">#FFB00020</color>
 </resources>

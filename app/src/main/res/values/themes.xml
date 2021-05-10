@@ -16,7 +16,7 @@
     </style>
 
     <style name="OverFlow" parent="@style/Widget.AppCompat.Light.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_menu_dark</item>
+        <item name="android:src">@drawable/ic_menu_light</item>
     </style>
 
 </resources>

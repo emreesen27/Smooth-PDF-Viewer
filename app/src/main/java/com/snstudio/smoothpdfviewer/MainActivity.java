@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,6 +32,7 @@ import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.github.barteksc.pdfviewer.util.FitPolicy;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         OnPageErrorListener {
 
     private Menu menu;
+    private final String TAG = "APP_INFO";
     private final static int REQUEST_CODE = 42;
     private final static int PERMISSION_CODE = 42042;
     private final static String READ_EXTERNAL_STORAGE = "android.permission.READ_EXTERNAL_STORAGE";
@@ -79,8 +82,10 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         if (Intent.ACTION_VIEW.equals(action)) {
             Uri uri = intent.getData();
             createPdfViewer(uri);
+        } else if (Intent.ACTION_MAIN.equals(action)) {
+            Log.i(TAG, action);
         } else {
-            ///Todo add Toast message
+            showSnackBar("There was an error opening the file");
         }
     }
 
@@ -141,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
             startActivityForResult(intent, REQUEST_CODE);
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this, "File manager not working", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "File Picker Error");
         }
     }
 
@@ -178,6 +184,16 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
             startAnimation(1);
     }
 
+    private void showSnackBar(@NonNull String msg) {
+        Snackbar snackbar = Snackbar
+                .make(findViewById(R.id.main_layout), msg, Snackbar.LENGTH_SHORT);
+        snackbar.setBackgroundTint(ContextCompat
+                .getColor(Objects.requireNonNull(getApplicationContext()), R.color.err_color));
+        snackbar.setTextColor(ContextCompat
+                .getColor(Objects.requireNonNull(getApplicationContext()), R.color.white));
+        snackbar.show();
+    }
+
     @Override
     public void loadComplete(int nbPages) {
 
@@ -190,6 +206,6 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
     @Override
     public void onPageError(int page, Throwable t) {
-
+        showSnackBar("This Page could not be loaded: " + page);
     }
 }
