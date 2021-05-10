@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <color name="status_bar_color">#FF333333</color>
+    <color name="status_bar_color">#FF303030</color>
+    <color name="action_bar_color">#FF333333</color>
+    <color name="navigation_bar_color">#FF333333</color>
     <color name="bg_color">#FF212121</color>
+    <color name="main_color">#FF1B7CED</color>
+    <color name="main_text_color">#FFFFFFFF</color>
+    <color name="secondary_text_color">#FFD7D7D7</color>
 </resources>
