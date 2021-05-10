@@ -1,25 +1,28 @@
 package com.snstudio.smoothpdfviewer;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
@@ -29,13 +32,14 @@ import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.github.barteksc.pdfviewer.util.FitPolicy;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.File;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements OnPageChangeListener, OnLoadCompleteListener,
         OnPageErrorListener {
 
-    private PDFView pdfView;
+    private Menu menu;
     private final static int REQUEST_CODE = 42;
     private final static int PERMISSION_CODE = 42042;
     private final static String READ_EXTERNAL_STORAGE = "android.permission.READ_EXTERNAL_STORAGE";
@@ -49,6 +53,24 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         defineActionBar();
         defineView();
         checkPermission();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        this.menu = menu;
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
+        if (item.getItemId() == R.id.settings) {
+            //todo goto settings
+        } else if (item.getItemId() == R.id.hide_or_show_button) {
+            hideOrShowActionButton();
+        }
+        return true;
     }
 
     private void handleIntent() {
@@ -82,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     }
 
     private void createPdfViewer(Uri uri) {
-        pdfView = findViewById(R.id.pdfView);
+        PDFView pdfView = findViewById(R.id.pdfView);
         pdfView.fromUri(uri)
                 .enableSwipe(true)
                 .swipeHorizontal(true)
@@ -134,6 +156,26 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
     public void actionButtonClick(View view) {
         launchPicker();
+    }
+
+    private void startAnimation(int state) {
+        actionButton.animate()
+                .translationY(state == 0 ? actionButton.getHeight() : 0)
+                .alpha(state == 0 ? 0 : 1.0f)
+                .setDuration(300).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                menu.findItem(R.id.hide_or_show_button).setTitle(state == 1 ? "Hide Button" : "Show Button");
+                super.onAnimationEnd(animation);
+            }
+        });
+    }
+
+    private void hideOrShowActionButton() {
+        if (actionButton.getAlpha() == 1.0)
+            startAnimation(0);
+        else
+            startAnimation(1);
     }
 
     @Override
