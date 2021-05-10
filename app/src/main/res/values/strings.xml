@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Smooth Pdf Viewer</string>
+
+    <!-- content description -->
+    <string name="action_button">ActionButton</string>
+</resources>
