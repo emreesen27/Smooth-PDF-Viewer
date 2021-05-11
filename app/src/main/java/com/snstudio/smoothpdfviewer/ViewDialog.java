@@ -3,16 +3,11 @@ package com.snstudio.smoothpdfviewer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
-import android.text.TextUtils;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Details Dialog
