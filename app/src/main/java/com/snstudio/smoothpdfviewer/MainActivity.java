@@ -33,28 +33,38 @@ import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.github.barteksc.pdfviewer.util.FitPolicy;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.shockwave.pdfium.PdfDocument;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements OnPageChangeListener, OnLoadCompleteListener,
         OnPageErrorListener {
 
     private Menu menu;
+    private PDFView pdfView;
     private final String TAG = "APP_INFO";
     private final static int REQUEST_CODE = 42;
     private final static int PERMISSION_CODE = 42042;
     private final static String READ_EXTERNAL_STORAGE = "android.permission.READ_EXTERNAL_STORAGE";
     private FloatingActionButton actionButton;
+    private ArrayList<String> detailsMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        defineView();
         handleIntent();
         defineActionBar();
-        defineView();
         checkPermission();
     }
 
@@ -72,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
             //todo goto settings
         } else if (item.getItemId() == R.id.hide_or_show_button) {
             hideOrShowActionButton();
+        } else if (item.getItemId() == R.id.details) {
+            ViewDialog alert = new ViewDialog();
+            alert.showDialog(this, detailsMap);
         }
         return true;
     }
@@ -91,7 +104,9 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
 
     private void defineView() {
+        pdfView = findViewById(R.id.pdf_view);
         actionButton = findViewById(R.id.action_button);
+        detailsMap = new ArrayList<>();
     }
 
     private void defineActionBar() {
@@ -109,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     }
 
     private void createPdfViewer(Uri uri) {
-        PDFView pdfView = findViewById(R.id.pdfView);
         pdfView.fromUri(uri)
                 .enableSwipe(true)
                 .swipeHorizontal(true)
@@ -124,6 +138,9 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
                 .pageSnap(false)
                 .pageFling(true)
                 .nightMode(false)
+                .onLoad(this)
+                .onPageChange(this)
+                .onPageError(this)
                 .load();
     }
 
@@ -171,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
                 .setDuration(300).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                menu.findItem(R.id.hide_or_show_button).setTitle(state == 1 ? "Hide Button" : "Show Button");
+                menu.findItem(R.id.hide_or_show_button).setChecked(state != 1);
                 super.onAnimationEnd(animation);
             }
         });
@@ -196,7 +213,28 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
     @Override
     public void loadComplete(int nbPages) {
+        PdfDocument.Meta meta = pdfView.getDocumentMeta();
+        detailsMap.clear();
+        detailsMap.add(meta.getTitle());
+        detailsMap.add(meta.getAuthor());
+        detailsMap.add(meta.getSubject());
+        detailsMap.add(meta.getKeywords());
+        detailsMap.add(meta.getCreator());
+        detailsMap.add(meta.getProducer());
+        detailsMap.add(dateFormatter(meta.getCreationDate()));
+        detailsMap.add(dateFormatter(meta.getModDate()));
+    }
 
+    private String dateFormatter(String data) {
+        if (!data.isEmpty()) {
+            String date = data.substring(2);
+            String y = date.substring(0, 4);
+            String m = date.substring(4, 6);
+            String d = date.substring(6, 8);
+            return y + "/" + m + "/" + d;
+        } else {
+            return data;
+        }
     }
 
     @Override
