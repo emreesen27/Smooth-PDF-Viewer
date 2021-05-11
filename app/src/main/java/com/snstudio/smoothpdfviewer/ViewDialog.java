@@ -1,11 +1,11 @@
 package com.snstudio.smoothpdfviewer;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,8 +15,12 @@ import java.util.ArrayList;
 
 public class ViewDialog {
 
-    @SuppressLint("SetTextI18n")
     public void showDialog(Activity activity, ArrayList<String> detailsList) {
+        if (detailsList.size() == 0) {
+            Toast.makeText(activity.getApplicationContext(), "There is no open pdf", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);

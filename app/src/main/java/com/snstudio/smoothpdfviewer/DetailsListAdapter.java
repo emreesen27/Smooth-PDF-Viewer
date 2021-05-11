@@ -43,8 +43,6 @@ public class DetailsListAdapter extends BaseAdapter {
         TextView title = convertView.findViewById(R.id.tv_titles);
         TextView content = convertView.findViewById(R.id.tv_content);
 
-
-
         title.setText(titles[position]);
         content.setText(metaIsNull(detailsList.get(position)));
 
