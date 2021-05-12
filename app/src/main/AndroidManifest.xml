@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmoothPdfViewer">
         <activity
+            android:name=".settings.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/Theme.SmoothPdfViewer" />
+        <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>

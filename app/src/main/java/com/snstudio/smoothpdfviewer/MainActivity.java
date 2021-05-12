@@ -35,6 +35,8 @@ import com.github.barteksc.pdfviewer.util.FitPolicy;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.shockwave.pdfium.PdfDocument;
+import com.snstudio.smoothpdfviewer.settings.SettingsActivity;
+import com.snstudio.smoothpdfviewer.settings.SettingsUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -49,10 +51,12 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     private final String TAG = "APP_INFO";
     private final static int REQUEST_CODE = 42;
     private final static int PERMISSION_CODE = 42042;
+    private final static int SETTINGS_REQUEST_CODE = 58058;
     private final static String READ_EXTERNAL_STORAGE = "android.permission.READ_EXTERNAL_STORAGE";
     private FloatingActionButton actionButton;
     private ArrayList<String> detailsMap;
     private LinearLayout warningLayout;
+    private Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
         if (item.getItemId() == R.id.settings) {
-            //todo goto settings
+            goSettings();
         } else if (item.getItemId() == R.id.hide_or_show_button) {
             hideOrShowActionButton();
         } else if (item.getItemId() == R.id.details) {
@@ -89,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         final Intent intent = getIntent();
         final String action = intent.getAction();
         if (Intent.ACTION_VIEW.equals(action)) {
-            Uri uri = intent.getData();
+            uri = intent.getData();
             createPdfViewer(uri);
         } else if (Intent.ACTION_MAIN.equals(action)) {
             Log.i(TAG, action);
@@ -121,20 +125,26 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     }
 
     private void createPdfViewer(Uri uri) {
+        boolean nightMode = SettingsUtils.resolveNightMode(this);
+        boolean pageFling = !SettingsUtils.resolveFling(this);
+        boolean antiAliasing = SettingsUtils.resolveAntiAliasing(this);
+        boolean pageSwipe = SettingsUtils.resolvePageSwipe(this);
+        boolean pageSnap = SettingsUtils.resolvePageSnap(this);
+
         pdfView.fromUri(uri)
                 .enableSwipe(true)
-                .swipeHorizontal(true)
+                .swipeHorizontal(pageSwipe)
                 .enableDoubletap(true)
                 .defaultPage(0)
                 .enableAnnotationRendering(false)
-                .enableAntialiasing(true)
+                .enableAntialiasing(antiAliasing)
                 .spacing(0)
                 .autoSpacing(false)
                 .pageFitPolicy(FitPolicy.BOTH)
                 .fitEachPage(false)
-                .pageSnap(false)
-                .pageFling(true)
-                .nightMode(false)
+                .pageSnap(pageSnap)
+                .pageFling(pageFling)
+                .nightMode(nightMode)
                 .onLoad(this)
                 .onPageChange(this)
                 .onPageError(this)
@@ -153,6 +163,12 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         }
     }
 
+    private void goSettings() {
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        intent.putExtra("pdfUri", uri == null ? (String) null : uri.toString());
+        startActivityForResult(intent, SETTINGS_REQUEST_CODE);
+    }
+
     private void launchPicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("application/pdf");
@@ -164,12 +180,17 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         }
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SETTINGS_REQUEST_CODE && resultCode == RESULT_OK) {
+            String strUri = Objects.requireNonNull(data).getStringExtra("pdfUri");
+            uri = Uri.parse(strUri);
+            createPdfViewer(uri);
+            return;
+        }
         if (resultCode == RESULT_OK) {
-            Uri uri = Objects.requireNonNull(data).getData();
+            uri = Objects.requireNonNull(data).getData();
             createPdfViewer(uri);
         }
     }
