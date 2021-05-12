@@ -24,7 +24,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     private final static String READ_EXTERNAL_STORAGE = "android.permission.READ_EXTERNAL_STORAGE";
     private FloatingActionButton actionButton;
     private ArrayList<String> detailsMap;
-    private LinearLayout warningLayout;
+    private TextView warningLayout;
     private Uri uri;
 
     @Override
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     private void defineView() {
         pdfView = findViewById(R.id.pdf_view);
         actionButton = findViewById(R.id.action_button);
-        warningLayout = findViewById(R.id.lv_warning);
+        warningLayout = findViewById(R.id.warning);
         detailsMap = new ArrayList<>();
     }
 

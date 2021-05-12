@@ -38,7 +38,12 @@
             app:summaryOn="Snap pages to screen boundaries"
             app:title="Page Snap" />
 
-
     </PreferenceCategory>
+
+    <Preference
+        app:allowDividerAbove="true"
+        app:key="other.btn"
+        app:summary="View details"
+        app:title="About" />
 
 </PreferenceScreen>
