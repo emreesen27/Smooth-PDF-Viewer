@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="status_bar_color">#FF303030</color>
-    <color name="action_bar_color">#FF333333</color>
-    <color name="navigation_bar_color">#FF333333</color>
-    <color name="bg_color">#FF212121</color>
+    <color name="action_bar_color">#FF212121</color>
+    <color name="navigation_bar_color">#FF212121</color>
+    <color name="bg_color">#FF121212</color>
     <color name="main_color">#FF1B7CED</color>
     <color name="main_text_color">#FFFFFFFF</color>
     <color name="secondary_text_color">#FFE7E7E7</color>
+    <color name="other_text_color">#FFD9DDDc</color>
     <color name="err_color">#FFB00020</color>
 </resources>

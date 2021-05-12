@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="You haven't selected pdf yet"
-            android:textColor="@color/main_text_color"
+            android:textColor="@color/secondary_text_color"
             android:textSize="18sp" />
 
     </LinearLayout>
