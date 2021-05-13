@@ -14,9 +14,9 @@
         android:theme="@style/Theme.SmoothPdfViewer">
         <activity
             android:name=".settings.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:theme="@style/Theme.SmoothPdfViewer"
-            android:screenOrientation="portrait"/>
+            android:label="Settings"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.SmoothPdfViewer" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
