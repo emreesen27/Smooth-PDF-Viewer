@@ -9,3 +9,7 @@ Simple and fast PDF viewer for Android
  Settings Screen           |  Settings Screen 
 :-------------------------:|:-------------------------:
 <img src="https://github.com/emreesen27/Smooth-PDF-Viewer/blob/assets/ss/ss3.jpg?raw=true" width="200" height="400" /> | <img src="https://github.com/emreesen27/Smooth-PDF-Viewer/blob/assets/ss/ss6.jpg?raw=true" width="200" height="400" />
+
+ PDF Viewer Screen           |  PDF Viewer Screen 
+:-------------------------:|:-------------------------:
+<img src="https://github.com/emreesen27/Smooth-PDF-Viewer/blob/assets/ss/ss2.jpg?raw=true" width="200" height="400" /> | <img src="https://github.com/emreesen27/Smooth-PDF-Viewer/blob/assets/ss/ss4.jpg?raw=true" width="200" height="400" />
