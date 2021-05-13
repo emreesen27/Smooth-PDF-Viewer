@@ -42,7 +42,7 @@
 
     <Preference
         app:allowDividerAbove="true"
-        app:key="other.btn"
+        app:key="@string/about_btn_key"
         app:summary="View details"
         app:title="About" />
 
