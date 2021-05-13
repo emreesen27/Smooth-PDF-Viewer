@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,8 +55,9 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     private final static int SETTINGS_REQUEST_CODE = 58058;
     private final static String READ_EXTERNAL_STORAGE = "android.permission.READ_EXTERNAL_STORAGE";
     private FloatingActionButton actionButton;
+    private TextView pageNumber;
     private ArrayList<String> detailsMap;
-    private TextView warningLayout;
+    private LinearLayout warningLayout;
     private Uri uri;
 
     @Override
@@ -106,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     private void defineView() {
         pdfView = findViewById(R.id.pdf_view);
         actionButton = findViewById(R.id.action_button);
+        pageNumber = findViewById(R.id.tv_page_number);
         warningLayout = findViewById(R.id.warning);
         detailsMap = new ArrayList<>();
     }
@@ -196,10 +199,19 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     }
 
     public void actionButtonClick(View view) {
+        //todo jumping page
+    }
+
+    public void openButtonClick(View view) {
         launchPicker();
     }
 
     private void startAnimation(int state) {
+        if (pageNumber.getVisibility() == View.VISIBLE) {
+            pageNumber.setVisibility(View.INVISIBLE);
+        } else {
+            pageNumber.setVisibility(View.VISIBLE);
+        }
         actionButton.animate()
                 .translationY(state == 0 ? actionButton.getHeight() : 0)
                 .alpha(state == 0 ? 0 : 1.0f)
@@ -258,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
     @Override
     public void onPageChanged(int page, int pageCount) {
-
+        pageNumber.setText(String.valueOf(page + 1));
     }
 
     @Override

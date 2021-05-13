@@ -14,27 +14,64 @@
         android:layout_height="match_parent"
         android:background="@color/bg_color" />
 
-    <TextView
+    <LinearLayout
         android:id="@+id/warning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:text="You haven't selected pdf yet"
-        android:textColor="@color/secondary_text_color"
-        android:textSize="19sp" />
+        android:orientation="vertical">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/action_button"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You haven't selected pdf yet"
+            android:textColor="@color/secondary_text_color"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_open_pdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="openButtonClick"
+            android:padding="10dp"
+            android:text="Click to select PDF"
+            android:textColor="@color/main_color"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="20dp"
-        android:contentDescription="@string/action_button"
-        android:onClick="actionButtonClick"
-        android:src="@drawable/ic_plus"
-        app:backgroundTint="@color/main_color"
-        app:borderWidth="0dp"
-        app:tint="@color/white" />
+        android:layout_gravity="bottom|end">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="20dp"
+            android:contentDescription="@string/action_button"
+            android:onClick="actionButtonClick"
+            app:backgroundTint="@color/main_color"
+            app:borderWidth="0dp"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_page_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="16dp"
+            android:text="x"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+    </FrameLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
