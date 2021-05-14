@@ -215,7 +215,10 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         NumberPicker numberPicker = (NumberPicker) dialog.findViewById(R.id.number_picker);
         if (numberPicker != null) {
             numberPicker.setMaxValue(pageCount);
-            numberPicker.setOnValueChangedListener((picker, oldVal, newVal) -> pdfView.jumpTo(newVal, true));
+            numberPicker.setValue(pdfView.getCurrentPage() + 1);
+            numberPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
+                pdfView.jumpTo(newVal - 1, true);
+            });
         }
         dialog.show();
     }
