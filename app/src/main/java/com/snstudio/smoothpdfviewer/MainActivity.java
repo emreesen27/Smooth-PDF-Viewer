@@ -36,7 +36,6 @@ import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.github.barteksc.pdfviewer.util.FitPolicy;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.shawnlin.numberpicker.NumberPicker;
 import com.shockwave.pdfium.PdfDocument;
@@ -105,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         } else if (Intent.ACTION_MAIN.equals(action)) {
             Log.i(TAG, action);
         } else {
-            showSnackBar("There was an error opening the file");
+            showSnackBar("There was an error opening the file", true);
         }
     }
 
@@ -149,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
                 .spacing(0)
                 .autoSpacing(false)
                 .pageFitPolicy(FitPolicy.BOTH)
-                .fitEachPage(false)
+                .fitEachPage(true)
                 .pageSnap(pageSnap)
                 .pageFling(pageFling)
                 .nightMode(nightMode)
@@ -204,6 +203,10 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     }
 
     public void actionButtonClick(View view) {
+        if (pageCount == 0) {
+            Toast.makeText(getApplicationContext(), "No pdf selected yet", Toast.LENGTH_LONG).show();
+            return;
+        }
         final BottomSheetDialog dialog = new BottomSheetDialog(MainActivity.this);
         dialog.setContentView(R.layout.bottom_sheet);
         dialog.setCanceledOnTouchOutside(true);
@@ -239,11 +242,12 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
             startAnimation(1);
     }
 
-    private void showSnackBar(@NonNull String msg) {
+    private void showSnackBar(@NonNull String msg, boolean isError) {
         Snackbar snackbar = Snackbar
                 .make(findViewById(R.id.main_layout), msg, Snackbar.LENGTH_SHORT);
         snackbar.setBackgroundTint(ContextCompat
-                .getColor(Objects.requireNonNull(getApplicationContext()), R.color.err_color));
+                .getColor(Objects.requireNonNull(getApplicationContext()),
+                        isError ? R.color.err_color : R.color.main_color));
         snackbar.setTextColor(ContextCompat
                 .getColor(Objects.requireNonNull(getApplicationContext()), R.color.white));
         snackbar.show();
@@ -253,7 +257,6 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     public void loadComplete(int nbPages) {
         pageCount = nbPages;
         warningLayout.setVisibility(View.GONE);
-        hideOrShowActionButton();
         PdfDocument.Meta meta = pdfView.getDocumentMeta();
         detailsMap.clear();
         detailsMap.add(meta.getTitle());
@@ -285,6 +288,6 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
     @Override
     public void onPageError(int page, Throwable t) {
-        showSnackBar("This Page could not be loaded: " + page);
+        showSnackBar("This Page could not be loaded: " + page, true);
     }
 }
