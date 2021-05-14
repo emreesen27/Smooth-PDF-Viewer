@@ -84,7 +84,9 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
-        if (item.getItemId() == R.id.settings) {
+        if (item.getItemId() == R.id.open_pdf) {
+            launchPicker();
+        } else if (item.getItemId() == R.id.settings) {
             goSettings();
         } else if (item.getItemId() == R.id.hide_or_show_button) {
             hideOrShowActionButton();
