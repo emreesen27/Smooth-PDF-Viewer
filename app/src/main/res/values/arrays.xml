@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="titles">
+        <item>@string/titles</item>
+        <item>@string/author</item>
+        <item>@string/subject</item>
+        <item>@string/keywords</item>
+        <item>@string/creator</item>
+        <item>@string/producer</item>
+        <item>@string/creation_date</item>
+        <item>@string/mod_date</item>
+    </string-array>
+
+</resources>

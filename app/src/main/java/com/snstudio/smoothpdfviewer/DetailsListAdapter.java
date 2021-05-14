@@ -10,8 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class DetailsListAdapter extends BaseAdapter {
-    private final String[] titles = {"Titles:", "Author:", "Subject:",
-            "Keywords:", "Creator:", "Producer:", "Creation Date:", "Mod Date:"};
+    String[] titles;
     public ArrayList<String> detailsList;
     public Context context;
 
@@ -37,8 +36,10 @@ public class DetailsListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null)
+        if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.details_list_item, parent, false);
+            titles = context.getResources().getStringArray(R.array.titles);
+        }
 
         TextView title = convertView.findViewById(R.id.tv_titles);
         TextView content = convertView.findViewById(R.id.tv_content);

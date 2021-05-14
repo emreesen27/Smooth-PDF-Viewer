@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Settings Screen-->
+    <string name="settings_label">Ayarlar &amp; Hakkında</string>
+    <string name="snap_off">Sayfalar ekranda serbest bırakıldı</string>
+    <string name="snap_on">Sayfalar ekranı ortalıyor</string>
+    <string name="snap_title">Sayfa Kenetleme</string>
+    <string name="swipe_title">Kaydırma Yönü</string>
+    <string name="swipe_on">Sayfalar yatay olarak sıralandı</string>
+    <string name="swipe_off">Sayfalar dikey olarak sıralandı</string>
+    <string name="aliasing_title">Anti Aliasing</string>
+    <string name="aliasing_off">Anti aliasing kapalı</string>
+    <string name="aliasing_on">Anti aliasing açık</string>
+    <string name="fling_on">Sayfalar peş peşe kaydırılabilir</string>
+    <string name="fling_off">Sayfalar tek tek kaydıralabilir</string>
+    <string name="fling_title">Sayfa Geçişi</string>
+    <string name="night_title">Gece Modu</string>
+    <string name="night_on">Gece modu açık</string>
+    <string name="night_off">Gece modu kapalı</string>
+    <!-- Menu -->
+    <string name="open_pdf">PDF Aç</string>
+    <string name="settings">Ayarlar</string>
+    <string name="details">Ayrıntılar</string>
+    <string name="hide_button">Butonu Gizle</string>
+    <!-- Dialog -->
+    <string name="ok">OK</string>
+    <string name="there_no_pdf">Gösterilecek PDF yok</string>
+    <!-- Main Page-->
+    <string name="no_selected_pdf">Henüz PDF seçmediniz</string>
+    <string name="click_to_select_pdf">PDF açmak için tıklayınız</string>
+    <string name="page_not_loaded">Bu sayfa yüklenemedi: </string>
+    <string name="file_manager_not_working">Dosya yöneticisi çalışmıyor</string>
+    <string name="err_opening_file">Dosyayı açarken bir hata oluştu</string>
+
+    <!-- Description -->
+    <string name="titles">Başlık: </string>
+    <string name="author">Yazar: </string>
+    <string name="subject">Konu: </string>
+    <string name="keywords">Anahtar Kelimeler: </string>
+    <string name="creator">Kurucu: </string>
+    <string name="producer">Üretici: </string>
+    <string name="creation_date">Oluşturulma Tarihi: </string>
+    <string name="mod_date">Düzenleme Tarihi: </string>
+
+    <!-- About -->
+    <string name="version">sürüm 1.0.0</string>
+    <string name="open_source_license">Açık Kaynak &amp; Lisans</string>
+    <string name="open_source_desc">Bu uygulama açık kaynak olarak geliştirilmiştir</string>
+    <string name="about">Hakkında</string>
+    <string name="about_details">Detayları görüntüleyin</string>
+    <string name="pdf_viewer">PDF Görüntüleyici</string>
+
+
+</resources>

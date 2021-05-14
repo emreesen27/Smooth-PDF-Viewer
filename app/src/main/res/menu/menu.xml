@@ -5,14 +5,14 @@
 
         <item
             android:id="@+id/open_pdf"
-            android:title="Open PDF" />
+            android:title="@string/open_pdf" />
 
         <item
             android:id="@+id/settings"
-            android:title="Settings" />
+            android:title="@string/settings" />
         <item
             android:id="@+id/details"
-            android:title="Details" />
+            android:title="@string/details" />
     </group>
 
     <group
@@ -20,7 +20,7 @@
         android:checkableBehavior="all">
         <item
             android:id="@+id/hide_or_show_button"
-            android:title="Hide Button" />
+            android:title="@string/hide_button" />
 
     </group>
 

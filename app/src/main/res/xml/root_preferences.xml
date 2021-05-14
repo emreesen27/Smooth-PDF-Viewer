@@ -1,49 +1,49 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="PDF Viewer">
+    <PreferenceCategory app:title="@string/pdf_viewer">
 
         <SwitchPreferenceCompat
             app:defaultValue="false"
             app:key="pdf.view.night.mode"
-            app:summaryOff="Night mode is off"
-            app:summaryOn="Night mode is on"
-            app:title="Night Mode" />
+            app:summaryOff="@string/night_off"
+            app:summaryOn="@string/night_on"
+            app:title="@string/night_title" />
 
         <SwitchPreferenceCompat
             app:defaultValue="false"
             app:key="pdf.view.page.fling"
-            app:summaryOff="Pages are changed one by one"
-            app:summaryOn="Pages can be scrolled quickly"
-            app:title="Page Fling" />
+            app:summaryOff="@string/fling_off"
+            app:summaryOn="@string/fling_on"
+            app:title="@string/fling_title" />
 
         <SwitchPreferenceCompat
             app:defaultValue="true"
             app:key="pdf.view.anti.aliasing"
-            app:summaryOff="Anti aliasing is off"
-            app:summaryOn="Anti aliasing is on"
-            app:title="Anti Aliasing" />
+            app:summaryOff="@string/aliasing_off"
+            app:summaryOn="@string/aliasing_on"
+            app:title="@string/aliasing_title" />
 
         <SwitchPreferenceCompat
             app:defaultValue="true"
             app:key="pdf.view.page.swipe"
-            app:summaryOff="Pages scroll vertically"
-            app:summaryOn="Pages scroll horizontally"
-            app:title="Page Swipe" />
+            app:summaryOff="@string/swipe_off"
+            app:summaryOn="@string/swipe_on"
+            app:title="@string/swipe_title" />
 
 
         <SwitchPreferenceCompat
             app:defaultValue="false"
             app:key="pdf.view.page.snap"
-            app:summaryOff="Releases the pages on the screen"
-            app:summaryOn="Snap pages to screen boundaries"
-            app:title="Page Snap" />
+            app:summaryOff="@string/snap_off"
+            app:summaryOn="@string/snap_on"
+            app:title="@string/snap_title" />
 
     </PreferenceCategory>
 
     <Preference
         app:allowDividerAbove="true"
         app:key="@string/about_btn_key"
-        app:summary="View details"
-        app:title="About" />
+        app:summary="@string/about_details"
+        app:title="@string/about" />
 
 </PreferenceScreen>

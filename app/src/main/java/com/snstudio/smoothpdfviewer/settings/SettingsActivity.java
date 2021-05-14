@@ -54,7 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setBackgroundDrawable(new ColorDrawable(getResources().
                     getColor(R.color.action_bar_color, getTheme())));
-            Spannable title = new SpannableString("Settings & About");
+            Spannable title = new SpannableString(getResources().getString(R.string.settings_label));
             title.setSpan(new ForegroundColorSpan(getResources()
                             .getColor(R.color.main_text_color, getTheme())),
                     0, title.length(),

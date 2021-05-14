@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         } else if (Intent.ACTION_MAIN.equals(action)) {
             Log.i(TAG, action);
         } else {
-            showSnackBar("There was an error opening the file", true);
+            showSnackBar(getString(R.string.err_opening_file), true);
         }
     }
 
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
         try {
             startActivityForResult(intent, REQUEST_CODE);
         } catch (ActivityNotFoundException e) {
-            Toast.makeText(this, "File manager not working", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.file_manager_not_working), Toast.LENGTH_SHORT).show();
             Log.e(TAG, "File Picker Error");
         }
     }
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
     public void actionButtonClick(View view) {
         if (pageCount == 0) {
-            Toast.makeText(getApplicationContext(), "No pdf selected yet", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.no_selected_pdf), Toast.LENGTH_LONG).show();
             return;
         }
         final BottomSheetDialog dialog = new BottomSheetDialog(MainActivity.this);
@@ -290,6 +290,6 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
     @Override
     public void onPageError(int page, Throwable t) {
-        showSnackBar("This Page could not be loaded: " + page, true);
+        showSnackBar(getString(R.string.page_not_loaded) + page, true);
     }
 }

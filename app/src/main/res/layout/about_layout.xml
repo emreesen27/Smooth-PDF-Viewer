@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/app_name"
         android:layout_centerHorizontal="true"
-        android:text="version 1.0.0"
+        android:text="@string/version"
         android:textColor="@color/other_text_color"
         android:textSize="15sp" />
 
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/app_description"
         android:layout_centerHorizontal="true"
-        android:text="Open Source &amp; License"
+        android:text="@string/open_source_license"
         android:textColor="@color/main_color"
         android:textSize="15sp" />
 
@@ -51,7 +51,7 @@
         android:layout_marginBottom="10dp"
         android:ellipsize="end"
         android:gravity="center_horizontal"
-        android:text="The application has been developed as open source"
+        android:text="@string/open_source_desc"
         android:textColor="@color/other_text_color"
         android:textSize="12sp" />
 

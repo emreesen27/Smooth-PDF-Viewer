@@ -1,25 +1,58 @@
 <resources>
     <string name="app_name">Smooth Pdf Viewer</string>
 
-    <!-- content description -->
-    <string name="action_button">ActionButton</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <!--Description-->
+    <string name="action_btn_description" translatable="false">action_btn_description</string>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <!--Settings Screen-->
+    <string name="settings_label">Settings &amp; About</string>
+    <string name="about_btn_key" translatable="false">other.btn </string>
+    <string name="snap_off">Releases the pages on the screen</string>
+    <string name="snap_on">Snap pages to screen boundaries</string>
+    <string name="snap_title">Page Snap</string>
+    <string name="swipe_title">Page Swipe</string>
+    <string name="swipe_on">Pages scroll horizontally</string>
+    <string name="swipe_off">Pages scroll vertically</string>
+    <string name="aliasing_title">Anti Aliasing</string>
+    <string name="aliasing_off">Anti aliasing is off</string>
+    <string name="aliasing_on">Anti aliasing is on</string>
+    <string name="fling_on">Pages can be scrolled quickly</string>
+    <string name="fling_off">Pages are changed one by one</string>
+    <string name="fling_title">Page Fling</string>
+    <string name="night_title">Night Mode</string>
+    <string name="night_on">Night mode is on</string>
+    <string name="night_off">Night mode is off</string>
+    <!-- Menu -->
+    <string name="open_pdf">Open PDF</string>
+    <string name="settings">Settings</string>
+    <string name="details">Details</string>
+    <string name="hide_button">Hide Button</string>
+    <!-- Dialog -->
+    <string name="ok">OK</string>
+    <string name="there_no_pdf">There is no open pdf</string>
+    <!-- Main Page-->
+    <string name="no_selected_pdf">You haven\'t selected pdf yet</string>
+    <string name="click_to_select_pdf">Click to select PDF</string>
+    <string name="page_not_loaded">This Page could not be loaded: </string>
+    <string name="file_manager_not_working">File manager not working</string>
+    <string name="err_opening_file">There was an error opening the file</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <!-- Description -->
+    <string name="titles">Titles: </string>
+    <string name="author">Author: </string>
+    <string name="subject">Subject: </string>
+    <string name="keywords">Keywords: </string>
+    <string name="creator">Creator: </string>
+    <string name="producer">Producer: </string>
+    <string name="creation_date">Creation Date: </string>
+    <string name="mod_date">Mod Date: </string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-
-    <string name="about_btn_key">other.btn</string>
+    <!-- About -->
+    <string name="version">version 1.0.0</string>
+    <string name="open_source_license">Open Source &amp; License</string>
+    <string name="open_source_desc">The application has been developed as open source</string>
+    <string name="about">About</string>
+    <string name="about_details">View details</string>
+    <string name="pdf_viewer">PDF Viewer</string>
 
 </resources>

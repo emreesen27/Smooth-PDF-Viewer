@@ -17,7 +17,9 @@ public class ViewDialog {
 
     public void showDialog(Activity activity, ArrayList<String> detailsList) {
         if (detailsList.size() == 0) {
-            Toast.makeText(activity.getApplicationContext(), "There is no open pdf", Toast.LENGTH_LONG).show();
+            Toast.makeText(activity.getApplicationContext(),
+                    activity.getResources().getString(R.string.there_no_pdf),
+                    Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -31,9 +33,7 @@ public class ViewDialog {
         listView.setAdapter(adapter);
 
         Button dialogButton = dialog.findViewById(R.id.btn_dialog);
-        dialogButton.setOnClickListener(v -> {
-            dialog.dismiss();
-        });
+        dialogButton.setOnClickListener(v -> dialog.dismiss());
 
         dialog.show();
     }
