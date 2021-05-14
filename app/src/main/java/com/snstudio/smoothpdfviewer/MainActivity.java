@@ -24,7 +24,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,8 +35,10 @@ import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.github.barteksc.pdfviewer.util.FitPolicy;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.shawnlin.numberpicker.NumberPicker;
 import com.shockwave.pdfium.PdfDocument;
 import com.snstudio.smoothpdfviewer.settings.SettingsActivity;
 import com.snstudio.smoothpdfviewer.settings.SettingsUtils;
@@ -54,11 +58,12 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     private final static int PERMISSION_CODE = 42042;
     private final static int SETTINGS_REQUEST_CODE = 58058;
     private final static String READ_EXTERNAL_STORAGE = "android.permission.READ_EXTERNAL_STORAGE";
-    private FloatingActionButton actionButton;
+    private FrameLayout actionLayout;
     private TextView pageNumber;
     private ArrayList<String> detailsMap;
     private LinearLayout warningLayout;
     private Uri uri;
+    private int pageCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
     private void defineView() {
         pdfView = findViewById(R.id.pdf_view);
-        actionButton = findViewById(R.id.action_button);
+        actionLayout = findViewById(R.id.action_layout);
         pageNumber = findViewById(R.id.tv_page_number);
         warningLayout = findViewById(R.id.warning);
         detailsMap = new ArrayList<>();
@@ -199,7 +204,15 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     }
 
     public void actionButtonClick(View view) {
-        //todo jumping page
+        final BottomSheetDialog dialog = new BottomSheetDialog(MainActivity.this);
+        dialog.setContentView(R.layout.bottom_sheet);
+        dialog.setCanceledOnTouchOutside(true);
+        NumberPicker numberPicker = (NumberPicker) dialog.findViewById(R.id.number_picker);
+        if (numberPicker != null) {
+            numberPicker.setMaxValue(pageCount);
+            numberPicker.setOnValueChangedListener((picker, oldVal, newVal) -> pdfView.jumpTo(newVal, true));
+        }
+        dialog.show();
     }
 
     public void openButtonClick(View view) {
@@ -207,13 +220,8 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     }
 
     private void startAnimation(int state) {
-        if (pageNumber.getVisibility() == View.VISIBLE) {
-            pageNumber.setVisibility(View.INVISIBLE);
-        } else {
-            pageNumber.setVisibility(View.VISIBLE);
-        }
-        actionButton.animate()
-                .translationY(state == 0 ? actionButton.getHeight() : 0)
+        actionLayout.animate()
+                .translationY(state == 0 ? actionLayout.getHeight() : 0)
                 .alpha(state == 0 ? 0 : 1.0f)
                 .setDuration(300).setListener(new AnimatorListenerAdapter() {
             @Override
@@ -225,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
     }
 
     private void hideOrShowActionButton() {
-        if (actionButton.getAlpha() == 1.0)
+        if (actionLayout.getAlpha() == 1.0)
             startAnimation(0);
         else
             startAnimation(1);
@@ -243,7 +251,9 @@ public class MainActivity extends AppCompatActivity implements OnPageChangeListe
 
     @Override
     public void loadComplete(int nbPages) {
+        pageCount = nbPages;
         warningLayout.setVisibility(View.GONE);
+        hideOrShowActionButton();
         PdfDocument.Meta meta = pdfView.getDocumentMeta();
         detailsMap.clear();
         detailsMap.add(meta.getTitle());
