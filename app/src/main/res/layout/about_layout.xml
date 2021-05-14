@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/app_name"
         android:layout_centerHorizontal="true"
-        android:text="sürüm 1.0.0"
+        android:text="version 1.0.0"
         android:textColor="@color/other_text_color"
         android:textSize="15sp" />
 
