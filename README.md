@@ -7,6 +7,7 @@
 * Simple and fast PDF viewer for Android
 * Dark theme support
 * Night mode support
+* Page jumping
 * PDF settings
 
  Home Screen - Light Theme |  Home Screen - Dark Theme
