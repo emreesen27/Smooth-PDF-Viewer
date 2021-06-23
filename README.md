@@ -1,6 +1,13 @@
 # Smooth PDF Viewer
-Simple and fast PDF viewer for Android
 
+<p align="center">
+<img src="https://github.com/emreesen27/Smooth-PDF-Viewer/blob/assets/appicon.png?raw=true" width="150" height="150" />
+ </p>
+
+* Simple and fast PDF viewer for Android
+* Dark theme support
+* Night mode support
+* PDF settings
 
  Home Screen - Light Theme |  Home Screen - Dark Theme
 :-------------------------:|:-------------------------:
